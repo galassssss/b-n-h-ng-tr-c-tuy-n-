@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách sản phẩm - BÁN HÀNG TRỰC TUYẾN</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <!-- Header -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a th:href="@{/}" class="nav-brand">
+                <span>🛒</span> BÁN HÀNG TRỰC TUYẾN
+            </a>
+            <ul class="nav-links">
+                <li class="nav-item"><a th:href="@{/}">Trang chủ</a></li>
+                <li class="nav-item" th:classappend="${categoryId == null ? 'active' : ''}">
+                    <a th:href="@{/products}">Tất cả</a>
+                </li>
+                <li class="nav-item" th:classappend="${categoryId == 1 ? 'active' : ''}">
+                    <a th:href="@{/products(categoryId=1)}">Điện thoại di động</a>
+                </li>
+                <li class="nav-item" th:classappend="${categoryId == 2 ? 'active' : ''}">
+                    <a th:href="@{/products(categoryId=2)}">Máy tính bảng</a>
+                </li>
+            </ul>
+            <div class="cart-widget">
+                <span class="cart-icon">🛍️</span>
+                <span id="cart-badge" class="cart-badge">0</span>
+                <span id="cart-total" class="cart-total">0 ₫</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Breadcrumb & Tiêu đề -->
+        <div class="breadcrumb">
+            <a th:href="@{/}">Trang chủ</a>
+            <span>›</span>
+            <span>Danh sách sản phẩm</span>
+            <span th:if="${selectedCategoryName != null}">›</span>
+            <span th:if="${selectedCategoryName != null}" th:text="${selectedCategoryName}" style="font-weight: 600; color: var(--primary-color);"></span>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+            <h1 class="section-title" style="margin-bottom: 0;">
+                <span th:if="${selectedCategoryName != null}" th:text="${selectedCategoryName}">Sản phẩm</span>
+                <span th:if="${selectedCategoryName == null}">Tất cả sản phẩm</span>
+                <span style="font-size: 1rem; color: var(--text-muted); font-weight: normal;" th:text="'(' + ${#lists.size(products)} + ' sản phẩm)'"></span>
+            </h1>
+
+            <!-- Quick category chips -->
+            <div class="category-chips" style="margin-bottom: 0;">
+                <a th:href="@{/products}" class="chip" th:classappend="${categoryId == null ? 'active' : ''}">Tất cả</a>
+                <a th:href="@{/products(categoryId=1)}" class="chip" th:classappend="${categoryId == 1 ? 'active' : ''}">📱 Điện thoại di động</a>
+                <a th:href="@{/products(categoryId=2)}" class="chip" th:classappend="${categoryId == 2 ? 'active' : ''}">💻 Máy tính bảng</a>
+            </div>
+        </div>
+
+        <!-- Yêu cầu 5: Khối tìm kiếm và lọc sản phẩm -->
+        <section class="filter-card">
+            <form th:action="@{/products}" method="get" class="filter-form">
+                <!-- Tìm theo từ khóa (keyword) -->
+                <div class="form-group">
+                    <label for="keyword">🔍 Tên sản phẩm / Từ khóa:</label>
+                    <input type="text" id="keyword" name="keyword" th:value="${keyword}" placeholder="Ví dụ: iphone, samsung, ipad..." class="form-control">
+                </div>
+
+                <!-- Lọc theo danh mục (categoryId) -->
+                <div class="form-group">
+                    <label for="categoryId">📂 Danh mục:</label>
+                    <select id="categoryId" name="categoryId" class="form-control">
+                        <option value="">-- Tất cả danh mục --</option>
+                        <option th:each="cat : ${categories}"
+                                th:value="${cat.id}"
+                                th:text="${cat.name}"
+                                th:selected="${categoryId != null && categoryId == cat.id}">
+                        </option>
+                    </select>
+                </div>
+
+                <!-- Tìm theo khoảng giá tối thiểu (fromPrice) -->
+                <div class="form-group">
+                    <label for="fromPrice">💵 Từ giá (VNĐ):</label>
+                    <input type="number" id="fromPrice" name="fromPrice" th:value="${fromPrice}" placeholder="Ví dụ: 5000000" step="500000" min="0" class="form-control">
+                </div>
+
+                <!-- Tìm theo khoảng giá tối đa (toPrice) -->
+                <div class="form-group">
+                    <label for="toPrice">💵 Đến giá (VNĐ):</label>
+                    <input type="number" id="toPrice" name="toPrice" th:value="${toPrice}" placeholder="Ví dụ: 20000000" step="500000" min="0" class="form-control">
+                </div>
+
+                <!-- Nút thao tác -->
+                <div class="filter-buttons">
+                    <button type="submit" class="btn btn-primary">Lọc</button>
+                    <a th:href="@{/products}" class="btn btn-secondary" title="Đặt lại bộ lọc">Đặt lại</a>
+                </div>
+            </form>
+        </section>
+
+        <!-- Yêu cầu 3: Hiển thị danh sách sản phẩm -->
+        <section th:if="${not #lists.isEmpty(products)}" class="products-grid">
+            <div th:each="product : ${products}" class="product-card">
+                <div class="product-image-wrap">
+                    <a th:href="@{/products/{id}(id=${product.id})}">
+                        <img th:src="${product.image}" th:alt="${product.name}" onerror="this.src='https://via.placeholder.com/300x200?text=San+Pham'">
+                    </a>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">
+                        <a th:href="@{/products/{id}(id=${product.id})}" th:text="${product.name}">Tên sản phẩm</a>
+                    </h3>
+                    <p class="product-desc" th:text="${product.description}">Mô tả ngắn gọn về sản phẩm...</p>
+                    <div class="product-price" th:text="${#numbers.formatDecimal(product.price, 0, 'POINT', 0, 'POINT')} + ' ₫'">0 ₫</div>
+                    <div class="product-card-actions">
+                        <a th:href="@{/products/{id}(id=${product.id})}" class="btn btn-primary">
+                            Xem chi tiết
+                        </a>
+                        <button type="button" class="btn btn-secondary"
+                                th:attr="onclick=|CartManager.addToCart(${product.id}, '${product.name}', ${product.price})|">
+                            + Giỏ
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trạng thái trống (khi không tìm thấy sản phẩm nào) -->
+        <section th:if="${#lists.isEmpty(products)}" class="empty-state">
+            <div class="empty-state-icon">🔎</div>
+            <h3>Không tìm thấy sản phẩm nào phù hợp</h3>
+            <p>Vui lòng thử tìm kiếm với từ khóa khác hoặc điều chỉnh lại khoảng giá lọc.</p>
+            <a th:href="@{/products}" class="btn btn-primary">Xem tất cả sản phẩm</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 Bán Hàng Trực Tuyến - Spring Boot & Thymeleaf. Phát triển theo Bài Thực Hành 2.</p>
+    </footer>
+
+    <script th:src="@{/js/main.js}"></script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BÁN HÀNG TRỰC TUYẾN - Trang chủ</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <!-- Thanh điều hướng (Navbar) -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a th:href="@{/}" class="nav-brand">
+                <span>🛒</span> BÁN HÀNG TRỰC TUYẾN
+            </a>
+            <ul class="nav-links">
+                <li class="nav-item active"><a th:href="@{/}">Trang chủ</a></li>
+                <li class="nav-item"><a th:href="@{/products}">Tất cả</a></li>
+                <li class="nav-item"><a th:href="@{/products(categoryId=1)}">Điện thoại di động</a></li>
+                <li class="nav-item"><a th:href="@{/products(categoryId=2)}">Máy tính bảng</a></li>
+            </ul>
+            <div class="cart-widget">
+                <span class="cart-icon">🛍️</span>
+                <span id="cart-badge" class="cart-badge">0</span>
+                <span id="cart-total" class="cart-total">0 ₫</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Hero Section với tiêu đề chính -->
+        <section class="hero">
+            <h1>BÁN HÀNG TRỰC TUYẾN</h1>
+            <p>Khám phá các sản phẩm công nghệ điện thoại thông minh, máy tính bảng hàng đầu với mức giá tốt nhất và bảo hành chính hãng.</p>
+            <div class="hero-actions">
+                <a th:href="@{/products}" class="btn btn-white">
+                    <span>📱💻</span> Xem tất cả sản phẩm
+                </a>
+                <a th:href="@{/products(categoryId=1)}" class="btn btn-outline">
+                    Điện thoại di động
+                </a>
+                <a th:href="@{/products(categoryId=2)}" class="btn btn-outline">
+                    Máy tính bảng
+                </a>
+            </div>
+        </section>
+
+        <!-- Danh mục mua sắm -->
+        <section>
+            <h2 class="section-title">Danh mục nổi bật</h2>
+            <div class="categories-grid">
+                <!-- Danh mục: Tất cả -->
+                <div class="category-card">
+                    <div>
+                        <div class="category-icon">🛍️</div>
+                        <h3 class="category-name">Tất cả sản phẩm</h3>
+                        <p class="category-desc">Xem toàn bộ kho sản phẩm thiết bị công nghệ mới nhất hiện có.</p>
+                    </div>
+                    <a th:href="@{/products}" class="btn btn-primary">Khám phá ngay</a>
+                </div>
+
+                <!-- Danh mục: Điện thoại di động -->
+                <div class="category-card">
+                    <div>
+                        <div class="category-icon">📱</div>
+                        <h3 class="category-name">Điện thoại di động</h3>
+                        <p class="category-desc">iPhone, Samsung Galaxy, Xiaomi và nhiều dòng smartphone cao cấp khác.</p>
+                    </div>
+                    <a th:href="@{/products(categoryId=1)}" class="btn btn-primary">Xem điện thoại</a>
+                </div>
+
+                <!-- Danh mục: Máy tính bảng -->
+                <div class="category-card">
+                    <div>
+                        <div class="category-icon">💻</div>
+                        <h3 class="category-name">Máy tính bảng</h3>
+                        <p class="category-desc">iPad Pro, iPad Air, Galaxy Tab phục vụ tối ưu cho công việc và giải trí.</p>
+                    </div>
+                    <a th:href="@{/products(categoryId=2)}" class="btn btn-primary">Xem máy tính bảng</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 Bán Hàng Trực Tuyến - Spring Boot & Thymeleaf. Phát triển theo Bài Thực Hành 2.</p>
+    </footer>
+
+    <script th:src="@{/js/main.js}"></script>
+</body>
+</html>

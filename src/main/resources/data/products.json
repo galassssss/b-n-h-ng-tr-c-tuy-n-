@@ -1,0 +1,66 @@
+[
+  {
+    "id": 1,
+    "name": "iPhone 15 Pro Max 256GB",
+    "description": "Titan tự nhiên sang trọng, chip Apple A17 Pro cực mạnh, camera tiềm vọng zoom 5x, màn hình Super Retina XDR 120Hz.",
+    "price": 29990000.0,
+    "image": "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=600&auto=format&fit=crop&q=80",
+    "categoryId": 1
+  },
+  {
+    "id": 2,
+    "name": "iPhone 14 128GB",
+    "description": "Thiết kế hiện đại, camera kép sắc nét với chế độ Action Mode đỉnh cao, chip A15 Bionic mượt mà mọi tác vụ.",
+    "price": 16990000.0,
+    "image": "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=600&auto=format&fit=crop&q=80",
+    "categoryId": 1
+  },
+  {
+    "id": 3,
+    "name": "Samsung Galaxy S24 Ultra 256GB",
+    "description": "Quyền năng Galaxy AI, khung viền Titanium bền bỉ, camera 200MP, bút S-Pen tích hợp và chip Snapdragon 8 Gen 3 for Galaxy.",
+    "price": 28490000.0,
+    "image": "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=600&auto=format&fit=crop&q=80",
+    "categoryId": 1
+  },
+  {
+    "id": 4,
+    "name": "Xiaomi Redmi Note 13 Pro",
+    "description": "Camera 200MP chống rung quang học OIS, màn hình AMOLED 1.5K 120Hz, sạc nhanh Turbo 67W cực kỳ ấn tượng.",
+    "price": 6890000.0,
+    "image": "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=600&auto=format&fit=crop&q=80",
+    "categoryId": 1
+  },
+  {
+    "id": 5,
+    "name": "iPad Pro M2 11 inch Wi-Fi 128GB",
+    "description": "Hiệu năng bứt phá với vi xử lý Apple M2, màn hình Liquid Retina sắc nét với công nghệ ProMotion 120Hz, hỗ trợ Apple Pencil Hover.",
+    "price": 19990000.0,
+    "image": "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=600&auto=format&fit=crop&q=80",
+    "categoryId": 2
+  },
+  {
+    "id": 6,
+    "name": "iPad Air 5 M1 Wi-Fi 64GB",
+    "description": "Sức mạnh từ chip M1 vượt trội, màn hình 10.9 inch rực rỡ, camera trước 12MP Ultra Wide với tính năng Center Stage thông minh.",
+    "price": 13490000.0,
+    "image": "https://images.unsplash.com/photo-1561154464-82e9adf32764?w=600&auto=format&fit=crop&q=80",
+    "categoryId": 2
+  },
+  {
+    "id": 7,
+    "name": "iPad Gen 10 10.9 inch Wi-Fi 64GB",
+    "description": "Thiết kế toàn màn hình với màu sắc trẻ trung, cổng kết nối USB-C tiện dụng, chip A14 Bionic xử lý mượt mà tác vụ học tập giải trí.",
+    "price": 9490000.0,
+    "image": "https://images.unsplash.com/photo-1585790050230-5dd28404ccb9?w=600&auto=format&fit=crop&q=80",
+    "categoryId": 2
+  },
+  {
+    "id": 8,
+    "name": "Samsung Galaxy Tab S9 FE Wi-Fi 128GB",
+    "description": "Kháng nước và bụi chuẩn IP68, màn hình 90Hz mượt mà, tặng kèm bút S-Pen quyền năng trong hộp máy, pin khủng 8000mAh.",
+    "price": 8990000.0,
+    "image": "https://images.unsplash.com/photo-1527690719875-dd8c8c5c7d81?w=600&auto=format&fit=crop&q=80",
+    "categoryId": 2
+  }
+]

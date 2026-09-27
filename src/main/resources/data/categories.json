@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "name": "Điện thoại di động",
+    "description": "Các dòng điện thoại thông minh chính hãng mới nhất"
+  },
+  {
+    "id": 2,
+    "name": "Máy tính bảng",
+    "description": "Các dòng máy tính bảng iPad, Samsung Tab phục vụ học tập và làm việc"
+  }
+]

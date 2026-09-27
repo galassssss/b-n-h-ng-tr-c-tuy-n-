@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${product.name} + ' - Chi tiết sản phẩm'">Chi tiết sản phẩm</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <!-- Header -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a th:href="@{/}" class="nav-brand">
+                <span>🛒</span> BÁN HÀNG TRỰC TUYẾN
+            </a>
+            <ul class="nav-links">
+                <li class="nav-item"><a th:href="@{/}">Trang chủ</a></li>
+                <li class="nav-item"><a th:href="@{/products}">Tất cả</a></li>
+                <li class="nav-item"><a th:href="@{/products(categoryId=1)}">Điện thoại di động</a></li>
+                <li class="nav-item"><a th:href="@{/products(categoryId=2)}">Máy tính bảng</a></li>
+            </ul>
+            <div class="cart-widget">
+                <span class="cart-icon">🛍️</span>
+                <span id="cart-badge" class="cart-badge">0</span>
+                <span id="cart-total" class="cart-total">0 ₫</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Breadcrumb -->
+        <div class="breadcrumb">
+            <a th:href="@{/}">Trang chủ</a>
+            <span>›</span>
+            <a th:href="@{/products}">Sản phẩm</a>
+            <span th:if="${category != null}">›</span>
+            <a th:if="${category != null}" th:href="@{/products(categoryId=${category.id})}" th:text="${category.name}">Danh mục</a>
+            <span>›</span>
+            <span th:text="${product.name}" style="color: var(--primary-color); font-weight: 600;">Tên sản phẩm</span>
+        </div>
+
+        <!-- Chi tiết sản phẩm (Yêu cầu 4) -->
+        <article class="detail-card">
+            <!-- Hình ảnh sản phẩm -->
+            <div class="detail-image-box">
+                <img th:src="${product.image}" th:alt="${product.name}" onerror="this.src='https://via.placeholder.com/500x400?text=San+Pham'">
+            </div>
+
+            <!-- Thông tin sản phẩm -->
+            <div class="detail-info">
+                <!-- Danh mục sản phẩm -->
+                <div class="detail-category-badge">
+                    <span th:if="${category != null}" th:text="'📁 ' + ${category.name}">📁 Danh mục</span>
+                    <span th:if="${category == null}" th:text="'Mã DM: ' + ${product.categoryId}"></span>
+                </div>
+
+                <!-- Tên sản phẩm -->
+                <h1 class="detail-title" th:text="${product.name}">Tên sản phẩm</h1>
+
+                <!-- Giá sản phẩm -->
+                <div class="detail-price" th:text="${#numbers.formatDecimal(product.price, 0, 'POINT', 0, 'POINT')} + ' ₫'">
+                    0 ₫
+                </div>
+
+                <!-- Mô tả chi tiết -->
+                <div>
+                    <h3 class="detail-desc-title">Mô tả sản phẩm:</h3>
+                    <div class="detail-desc-content" th:text="${product.description}">
+                        Thông tin chi tiết tính năng, cấu hình và điểm nổi bật của sản phẩm...
+                    </div>
+                </div>
+
+                <!-- Nút thao tác -->
+                <div class="detail-actions">
+                    <button type="button" class="btn btn-primary" style="padding: 0.85rem 2rem; font-size: 1.05rem;"
+                            th:attr="onclick=|CartManager.addToCart(${product.id}, '${product.name}', ${product.price})|">
+                        🛒 Thêm vào giỏ hàng
+                    </button>
+                    <a th:href="@{/products}" class="btn btn-secondary" style="padding: 0.85rem 1.5rem;">
+                        ← Quay lại danh sách
+                    </a>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <p>© 2026 Bán Hàng Trực Tuyến - Spring Boot & Thymeleaf. Phát triển theo Bài Thực Hành 2.</p>
+    </footer>
+
+    <script th:src="@{/js/main.js}"></script>
+</body>
+</html>
